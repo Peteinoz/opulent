@@ -1,68 +1,53 @@
-const fs = require('fs');
-const path = require('path');
-
-exports.handler = async (event, context) => {
-    try {
-        if (event.httpMethod !== 'POST') {
-            return {
-                statusCode: 405,
-                body: 'Method Not Allowed'
-            };
-        }
-
-        // Get query from POST body
-        const body = JSON.parse(event.body);
-        const query = body.query.trim();
-
-        // Create safe slug for filename
-        const slug = query
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '-')
-            .substring(0, 80); // limit length
-
-        const filename = `${slug}.html`;
-        const filePath = path.join(__dirname, '..', '..', 'searches', filename);
-
-        // Build HTML content (simple starter)
-        const htmlContent = `
-<!DOCTYPE html>
+exports.handler = async (event) => {
+  const query = event.queryStringParameters?.q || 'Welcome';
+  
+  // Convert query parameter to title case
+  const title = query
+    .replace(/\+/g, ' ')
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+  
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${query} - Opulent Shipyard Monaco</title>
-    <meta name="description" content="Result page for: ${query}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 10px;
+        }
+        .content {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Search Result: ${query}</h1>
-    <p>More content will go here...</p>
+    <h1>${title}</h1>
+    <div class="content">
+        <p>Welcome to our page about <strong>${title}</strong>.</p>
+        <p>This content was dynamically generated based on your search query.</p>
+        <p>We're excited to share information about this topic with you!</p>
+    </div>
 </body>
 </html>`;
 
-        // Save HTML file
-        fs.writeFileSync(filePath, htmlContent, 'utf8');
-
-        // Update llms.txt
-        const llmsPath = path.join(__dirname, '..', '..', 'llms.txt');
-        const url = `/searches/${filename}\n`;
-
-        fs.appendFileSync(llmsPath, url, 'utf8');
-
-        // Return new page URL
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                url: `/searches/${filename}`
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-    } catch (err) {
-        console.error('Grow Error:', err);
-        return {
-            statusCode: 500,
-            body: 'Internal Server Error'
-        };
-    }
+  return {
+    statusCode: 200,
+    headers: { 'Content-Type': 'text/html' },
+    body: html
+  };
 };
