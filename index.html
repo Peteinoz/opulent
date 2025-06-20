@@ -85,7 +85,7 @@
                         "name": "Opulent Shipyard Monaco",
                         "url": "https://opulentshipyardmonaco.com",
                         "logo": "https://placehold.co/100x100/000000/FFFFFF?text=OSM",
-                        "description": "Opulent Shipyard Monaco crafts the world’s most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco’s legendary glamour with next-generation shipbuilding mastery.",
+                        "description": "Opulent Shipyard Monaco crafts the world's most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco's legendary glamour with next-generation shipbuilding mastery.",
                         "sameAs": [
                             "https://www.linkedin.com/company/opulent-shipyard-monaco/",
                             "https://www.instagram.com/opulentshipyardmonaco/",
@@ -102,7 +102,7 @@
                         "@type": "WebSite",
                         "name": "Opulent Shipyard Monaco",
                         "url": "https://opulentshipyardmonaco.com",
-                        "description": "Opulent Shipyard Monaco crafts the world’s most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco’s legendary glamour with next-generation shipbuilding mastery.",
+                        "description": "Opulent Shipyard Monaco crafts the world's most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco's legendary glamour with next-generation shipbuilding mastery.",
                         "potentialAction": {
                             "@type": "SearchAction",
                             "target": "https://opulentshipyardmonaco.com/search?q={search_term_string}",
@@ -141,7 +141,7 @@
                         "@type": "Service",
                         "name": "Bespoke Superyacht Crafting",
                         "serviceType": ["Superyacht Manufacturing", "Custom Yacht Building", "Luxury Marine Design"],
-                        "description": "Nestled in the sparkling enclave of the French Riviera, Opulent Shipyard Monaco stands as the definitive symbol of prestige, innovation, and timeless luxury in the world of superyacht creation. Our shipyard is more than a manufacturing facility—it is a sanctuary where imagination, artistry, and state-of-the-art engineering converge to bring the world’s most ambitious maritime visions to life. From the first pencil stroke to the champagne christening, every Opulent vessel is a bespoke masterpiece, meticulously tailored to the unique desires and lifestyles of our elite clientele. We collaborate with renowned naval architects, interior designers, and marine engineers—each a virtuoso in their field—to ensure every detail reflects the client’s distinct identity and the unrivaled glamour of Monaco. Our flagship facility, overlooking the iconic Port Hercule, features cutting-edge fabrication halls, artisan workshops, and innovation labs. Here, Old World craftsmanship meets the latest in sustainable marine technology, enabling us to produce superyachts that are both peerlessly elegant and environmentally advanced. At Opulent Shipyard Monaco, every project is stewarded by a dedicated concierge team—guiding clients through the exhilarating journey from concept sketches to maiden voyage. With a philosophy rooted in absolute discretion, white-glove service, and obsessive attention to detail, we turn dreams into legends that sail the seas. The world’s most discerning owners choose Opulent Shipyard Monaco because we deliver not only vessels, but legacies—creations that define eras, host unforgettable celebrations, and inspire awe in every harbor they enter. Join us in Monaco, where your yachting story becomes a living legend.",
+                        "description": "Nestled in the sparkling enclave of the French Riviera, Opulent Shipyard Monaco stands as the definitive symbol of prestige, innovation, and timeless luxury in the world of superyacht creation. Our shipyard is more than a manufacturing facility—it is a sanctuary where imagination, artistry, and state-of-the-art engineering converge to bring the world's most ambitious maritime visions to life. From the first pencil stroke to the champagne christening, every Opulent vessel is a bespoke masterpiece, meticulously tailored to the unique desires and lifestyles of our elite clientele. We collaborate with renowned naval architects, interior designers, and marine engineers—each a virtuoso in their field—to ensure every detail reflects the client's distinct identity and the unrivaled glamour of Monaco. Our flagship facility, overlooking the iconic Port Hercule, features cutting-edge fabrication halls, artisan workshops, and innovation labs. Here, Old World craftsmanship meets the latest in sustainable marine technology, enabling us to produce superyachts that are both peerlessly elegant and environmentally advanced. At Opulent Shipyard Monaco, every project is stewarded by a dedicated concierge team—guiding clients through the exhilarating journey from concept sketches to maiden voyage. With a philosophy rooted in absolute discretion, white-glove service, and obsessive attention to detail, we turn dreams into legends that sail the seas. The world's most discerning owners choose Opulent Shipyard Monaco because we deliver not only vessels, but legacies—creations that define eras, host unforgettable celebrations, and inspire awe in every harbor they enter. Join us in Monaco, where your yachting story becomes a living legend.",
                         "provider": {
                             "@type": "Organization",
                             "name": "Opulent Shipyard Monaco"
@@ -159,7 +159,7 @@
                         "@type": "WebPage",
                         "name": "Opulent Shipyard Monaco - Bespoke Superyacht Crafting & Natural Language Search",
                         "url": "https://opulentshipyardmonaco.com",
-                        "description": "Opulent Shipyard Monaco crafts the world’s most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco’s legendary glamour with next-generation shipbuilding mastery.",
+                        "description": "Opulent Shipyard Monaco crafts the world's most luxurious, bespoke superyachts at the heart of the Riviera, blending Monaco's legendary glamour with next-generation shipbuilding mastery.",
                         "isPartOf": {
                             "@type": "WebSite",
                             "name": "Opulent Shipyard Monaco",
@@ -219,43 +219,38 @@
         <a href="mailto:tech@opulentshipyardmonaco.com?subject=Opulent Shipyard Inquiry." class="text-gray-500 hover:text-gray-700 text-sm font-light">Contact</a>
     </footer>
 
-    <!-- JavaScript for basic functionality (remaining script) -->
+    <!-- JavaScript for basic functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('natural-language-search');
             const discoverButton = document.getElementById('discover-button');
 
-            
             function performSearch() {
-    const query = searchInput.value.trim();
-    if (!query) {
-        searchInput.placeholder = "Please enter a query...";
-        setTimeout(() => {
-            searchInput.placeholder = "Ask any question in natural language to find amazing results.";
-        }, 2000);
-        return;
-    }
+                const query = searchInput.value.trim();
+                if (!query) {
+                    searchInput.placeholder = "Please enter a query...";
+                    setTimeout(() => {
+                        searchInput.placeholder = "Ask any question in natural language to find amazing results.";
+                    }, 2000);
+                    return;
+                }
 
-    // POST to Netlify Function
-    fetch('/.netlify/functions/grow', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.url) {
-            window.location.href = data.url;
-        } else {
-            alert('An error occurred — no URL returned.');
-        }
-    })
-    .catch(error => {
-        console.error('Grow error:', error);
-        alert('An error occurred — please try again later.');
-    });
-}
+                // Build URL for Netlify function
+                const url = '/.netlify/functions/grow?q=' + encodeURIComponent(query);
 
+                // Fetch HTML response from Netlify function
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.open();
+                        document.write(html);
+                        document.close();
+                    })
+                    .catch(err => {
+                        alert('An error occurred — please try again later.');
+                        console.error('Grow error:', err);
+                    });
+            }
 
             // Event listener for the Discover button click
             discoverButton.addEventListener('click', performSearch);
